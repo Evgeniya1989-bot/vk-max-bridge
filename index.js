@@ -4,13 +4,17 @@ const axios = require("axios");
 const app = express();
 app.use(express.json());
 
-const VK_TOKEN = process.env.VK_TOKEN;
+const VK_CONFIRMATION_CODE = "4b5e6273";
 const MAX_TOKEN = process.env.MAX_TOKEN;
 const MAX_CHAT_ID = process.env.MAX_CHAT_ID;
 
 app.post("/webhook", async (req, res) => {
   try {
     const data = req.body;
+
+    if (data.type === "confirmation") {
+      return res.send(VK_CONFIRMATION_CODE);
+    }
 
     if (data.type === "message_new") {
       const message = data.object.message;
@@ -34,10 +38,10 @@ app.post("/webhook", async (req, res) => {
       );
     }
 
-    res.send("ok");
+    return res.send("ok");
   } catch (e) {
     console.error(e);
-    res.send("error");
+    return res.send("error");
   }
 });
 
