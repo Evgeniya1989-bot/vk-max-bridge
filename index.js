@@ -44,5 +44,20 @@ app.post("/webhook", async (req, res) => {
     return res.send("error");
   }
 });
+app.get("/chats", async (req, res) => {
+  try {
+    const response = await axios.get("https://botapi.max.ru/chats", {
+      headers: {
+        Authorization: `Bearer ${MAX_TOKEN}`
+      }
+    });
 
+    return res.json(response.data);
+  } catch (e) {
+    console.error(e.response?.data || e.message);
+    return res.status(500).json({
+      error: e.response?.data || e.message
+    });
+  }
+});
 app.listen(process.env.PORT || 3000);
