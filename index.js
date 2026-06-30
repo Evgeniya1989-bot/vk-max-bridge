@@ -60,4 +60,8 @@ app.get("/chats", async (req, res) => {
     });
   }
 });
+app.post("/max-webhook", (req, res) => {
+  console.log("MAX UPDATE:", JSON.stringify(req.body, null, 2));
+  return res.send("ok");
+});
 app.listen(process.env.PORT || 3000);
