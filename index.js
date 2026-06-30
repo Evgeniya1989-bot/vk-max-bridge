@@ -48,7 +48,7 @@ app.get("/chats", async (req, res) => {
   try {
     const response = await axios.get("https://botapi.max.ru/chats", {
       headers: {
-        Authorization: `Bearer ${MAX_TOKEN}`
+Authorization: MAX_TOKEN`
       }
     });
 
