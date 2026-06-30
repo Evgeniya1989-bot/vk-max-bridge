@@ -27,12 +27,12 @@ app.post("/webhook", async (req, res) => {
       await axios.post(
         "https://botapi.max.ru/messages",
         {
-          chat_id: MAX_CHAT_ID,
+          chat_id: Number(MAX_CHAT_ID),
           text: text
         },
         {
           headers: {
-            Authorization: MAX_TOKEN`
+            Authorization: MAX_TOKEN
           }
         }
       );
@@ -40,28 +40,14 @@ app.post("/webhook", async (req, res) => {
 
     return res.send("ok");
   } catch (e) {
-    console.error(e);
+    console.error(e.response?.data || e.message);
     return res.send("error");
   }
 });
-app.get("/chats", async (req, res) => {
-  try {
-    const response = await axios.get("https://botapi.max.ru/chats", {
-      headers: {
-Authorization: MAX_TOKEN`
-      }
-    });
 
-    return res.json(response.data);
-  } catch (e) {
-    console.error(e.response?.data || e.message);
-    return res.status(500).json({
-      error: e.response?.data || e.message
-    });
-  }
-});
 app.post("/max-webhook", (req, res) => {
   console.log("MAX UPDATE:", JSON.stringify(req.body, null, 2));
   return res.send("ok");
 });
+
 app.listen(process.env.PORT || 3000);
