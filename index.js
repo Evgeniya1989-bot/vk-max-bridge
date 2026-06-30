@@ -32,7 +32,7 @@ app.post("/webhook", async (req, res) => {
         },
         {
           headers: {
-            Authorization: `Bearer ${MAX_TOKEN}`
+            Authorization: MAX_TOKEN`
           }
         }
       );
