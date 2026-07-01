@@ -28,11 +28,10 @@ app.post("/webhook", async (req, res) => {
         `${message.text || "(без текста)"}`;
 
       await axios.post(
-  "https://platform-api2.max.ru/messages",
-  {
-    chat_id: Number(MAX_CHAT_ID),
-    text: text
-  },
+  `https://platform-api2.max.ru/messages?chat_id=${MAX_CHAT_ID}`,
+{
+  text: text
+},
   {
     httpsAgent,
     headers: {
