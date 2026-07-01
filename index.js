@@ -1,6 +1,9 @@
 const express = require("express");
 const axios = require("axios");
-
+const https = require("https");
+const httpsAgent = new https.Agent({
+  rejectUnauthorized: false
+});
 const app = express();
 app.use(express.json());
 
@@ -25,17 +28,18 @@ app.post("/webhook", async (req, res) => {
         `${message.text || "(без текста)"}`;
 
       await axios.post(
-        "https://platform-api2.max.ru/messages",
-        {
-          chat_id: Number(MAX_CHAT_ID),
-          text: text
-        },
-        {
-          headers: {
-            Authorization: MAX_TOKEN
-          }
-        }
-      );
+  "https://platform-api2.max.ru/messages",
+  {
+    chat_id: Number(MAX_CHAT_ID),
+    text: text
+  },
+  {
+    httpsAgent,
+    headers: {
+      Authorization: MAX_TOKEN
+    }
+  }
+);
     }
 
     return res.send("ok");
