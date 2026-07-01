@@ -25,7 +25,7 @@ app.post("/webhook", async (req, res) => {
         `${message.text || "(без текста)"}`;
 
       await axios.post(
-        "https://botapi.max.ru/messages",
+        "https://platform-api2.max.ru/messages",
         {
           chat_id: Number(MAX_CHAT_ID),
           text: text
