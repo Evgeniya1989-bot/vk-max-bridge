@@ -7,7 +7,7 @@ const httpsAgent = new https.Agent({
 const app = express();
 app.use(express.json());
 
-const VK_CONFIRMATION_CODE = "4b5e6273";
+const VK_CONFIRMATION_CODE = "95e79047";
 const MAX_TOKEN = process.env.MAX_TOKEN;
 const MAX_CHAT_ID = process.env.MAX_CHAT_ID;
 
